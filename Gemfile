@@ -1,5 +1,5 @@
 source "https://rubygems.org"
 
-gem "nokogiri"
 gem "json"
-gem "pry"
+gem "rack"
+gem "unicorn"
