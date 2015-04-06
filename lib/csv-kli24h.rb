@@ -4,9 +4,20 @@ require "json"
 
 class KliAPI24h
   def self.call(env)
-    [200, {"Content-Type"=>"application/json; charset=utf-8", "Access-Control-Allow-Origin"=>"*"}, [self.get_kli]]
+    [200, {"Content-Type"=>"application/json; charset=utf-8", "Access-Control-Allow-Origin"=>"*"}, [self.route(env)]]
   end
 
+  def self.route(env)
+    request_path = env["REQUEST_PATH"]
+    kli_data = self.get_kli
+
+    case request_path
+    when /latest/
+      { fetch_time: kli_data[:fetch_time], result: [kli_data[:result][-1]] }.to_json
+    else
+      kli_data.to_json
+    end
+  end
 
   CACHE_MAX_AGE = 120
   @url = "http://www.uni-muenster.de/Klima/data/CR3000_Data24h.dat"
@@ -31,7 +42,7 @@ class KliAPI24h
 
     4.times { |i| csv.delete(0) }
     data = { fetch_time: fetch_time }
-    data[:kli] = csv.map do |row|
+    data[:result] = csv.map do |row|
       temp_row = row.to_h
 
       time_a = temp_row[:TIMESTAMP].to_time.utc.to_a[0..5].reverse!
@@ -43,7 +54,7 @@ class KliAPI24h
       temp_row
     end
 
-    @cache[:kli] = data.to_json
+    @cache[:kli] = data
     @cache[:fetch_time] = fetch_time
     @cache[:kli]
   end
