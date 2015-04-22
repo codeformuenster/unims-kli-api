@@ -63,9 +63,3 @@ class KliAPI24h
 
 end
 
-
-
-
-
-
-
