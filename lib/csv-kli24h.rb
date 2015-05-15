@@ -25,14 +25,14 @@ class KliAPI24h
   @cache = {
     fetch_time: Time.now.utc.to_i
   }
-  
+
 
   def self.get_kli
     if @cache[:fetch_time] != nil and Time.now.utc.to_i - @cache[:fetch_time] < CACHE_MAX_AGE
       @cache[:kli]
     else
       self.build_cache
-    end 
+    end
   end
 
 
