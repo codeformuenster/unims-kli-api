@@ -54,6 +54,15 @@ class KliAPI24h
       temp_row
     end
 
+    # strip properties
+    if ENV["KLI_PROPERTIES"]
+      wanted_props = ENV["KLI_PROPERTIES"].split(",").map(&:to_sym)
+
+      data[:result].each do |res|
+        res.keep_if { |k,v| wanted_props.include?(k) }
+      end
+    end
+
     @cache[:kli] = data
     @cache[:fetch_time] = fetch_time
     @cache[:kli]

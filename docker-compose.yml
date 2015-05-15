@@ -1,7 +1,10 @@
 app:
   build: .
   hostname: kli-app
+  environment:
+    - KLI_PROPERTIES=TIMESTAMP,AirTC_Avg,RH_Avg,Rain_Tot,BP_kPa_Avg,WS_Gust_Max,WindDir_D1_WVT,WS_ms_S_WVT
   expose:
    - "8080"
   ports:
     - "8081:8080"
+
