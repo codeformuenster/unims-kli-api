@@ -1,5 +1,5 @@
 source "https://rubygems.org"
 
 gem "json"
-gem "rack"
-gem "unicorn"
+gem "rack", ">= 1.6.2"
+gem "unicorn", ">= 4.8.3"
