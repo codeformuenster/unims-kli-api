@@ -20,7 +20,7 @@ class KliAPI24h
   end
 
   CACHE_MAX_AGE = 120
-  @url = "http://www.uni-muenster.de/Klima/data/CR3000_Data24h.dat"
+  @url = "https://www.uni-muenster.de/Klima/data/CR3000_Data24h.dat"
   @headers = [:TIMESTAMP, :RECORD, :AirTC_Avg, :SW_in_Avg, :WS_ms_S_WVT, :WindDir_D1_WVT, :WindDir_SD1_WVT, :WS_Gust_Max, :RH_Avg, :BP_kPa_Avg, :Rain_Tot, :BiralVisInst_Avg, :WeatherCode00_Tot, :WeatherCode04_Tot, :WeatherCode30_Tot, :WeatherCode40_Tot, :WeatherCode50_Tot, :WeatherCode60_Tot, :WeatherCode70_Tot]
   @cache = {
     fetch_time: Time.now.utc.to_i
